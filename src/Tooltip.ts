@@ -3,21 +3,9 @@
  * Version: 1.0.1
  * A Tooltip Javascript library built with Typescript
  **/
-/**
- * OptionInterface Interface
- */
-interface OptionsInterface {
-    color: string;
-    bgcolor: string;
-}
 NodeList.prototype.forEach = Array.prototype.forEach;
 class Tooltip {
 
-    /**
-     * Tooltip options
-     * @type {{color: string; bgcolor: string}}
-     */
-    private options: OptionsInterface = {color: "#fff", bgcolor: "#000"}
     /**
      * Element that get a tooltip
      * @type {NodeListOf<Element>}
@@ -35,8 +23,7 @@ class Tooltip {
      * @param title
      * @param {OptionsInterface} options
      */
-    constructor(elms: string, title: string, options?: OptionsInterface) {
-        if (options !== undefined) this.options = options
+    constructor(elms: string, title: string) {
         this.elms = document.querySelectorAll(elms)
         if (this.elms.length < 1) throw new Error("Elements is not defined")
         this.title = title
@@ -65,9 +52,7 @@ class Tooltip {
         let tooltip = this.createTooltip()
         // building the element
         tooltip.innerHTML = this.title
-        tooltip.style.background = this.options.bgcolor
-        tooltip.style.color = this.options.color
-        tooltip.style.top = top - el.getBoundingClientRect().height - 20 + "px"
+        tooltip.style.top = top - el.getBoundingClientRect().height + "px"
         tooltip.style.left = el.getBoundingClientRect().width / 2 - tooltip.offsetWidth / 2 + "px"
         // append to the body
         document.body.appendChild(tooltip)

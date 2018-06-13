@@ -1,4 +1,9 @@
 "use strict";
+/**
+ * Created by WebDev
+ * Version: 1.0.1
+ * A Tooltip Javascript library built with Typescript
+ **/
 NodeList.prototype.forEach = Array.prototype.forEach;
 var Tooltip = /** @class */ (function () {
     /**
@@ -7,14 +12,7 @@ var Tooltip = /** @class */ (function () {
      * @param title
      * @param {OptionsInterface} options
      */
-    function Tooltip(elms, title, options) {
-        /**
-         * Tooltip options
-         * @type {{color: string; bgcolor: string}}
-         */
-        this.options = { color: "#fff", bgcolor: "#000" };
-        if (options !== undefined)
-            this.options = options;
+    function Tooltip(elms, title) {
         this.elms = document.querySelectorAll(elms);
         if (this.elms.length < 1)
             throw new Error("Elements is not defined");
@@ -43,9 +41,7 @@ var Tooltip = /** @class */ (function () {
         var tooltip = this.createTooltip();
         // building the element
         tooltip.innerHTML = this.title;
-        tooltip.style.background = this.options.bgcolor;
-        tooltip.style.color = this.options.color;
-        tooltip.style.top = top - el.getBoundingClientRect().height - 20 + "px";
+        tooltip.style.top = top - el.getBoundingClientRect().height + "px";
         tooltip.style.left = el.getBoundingClientRect().width / 2 - tooltip.offsetWidth / 2 + "px";
         // append to the body
         document.body.appendChild(tooltip);

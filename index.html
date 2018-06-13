@@ -10,14 +10,27 @@
         .tooltip {
             width: fit-content;
             width: -moz-fit-content;
-            padding: 10px;
+            padding: 5px 8px;
             opacity: 0;
             position: absolute;
             animation: tooltip 0.3s forwards;
             font-size: 14px;
             font-family: 'Roboto', sans-serif;
             border-radius: 5px;
+            background: #03A9F4;
+            color: #fff;
         }
+
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 40%;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid #03A9F4;
+        }
+
 
         @keyframes tooltip {
             to {
@@ -25,12 +38,19 @@
             }
         }
 
+        .t {
+            margin-top: 140px;
+            width: -moz-fit-content;
+            width: fit-content;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
-<h1 class="t" style="margin-top: 140px;width: -moz-fit-content;width: fit-content;">tooltip here</h1>
-<h1 class="t" style="margin-top: 140px;width: -moz-fit-content;width: fit-content;">tooltip here</h1>
-<h1 class="t" style="margin-top: 140px;width: -moz-fit-content;width: fit-content;">tooltip here</h1>
+<h1 class="t" style="">tooltip here</h1>
+<h1 class="t">tooltip here</h1>
+<h1 class="t">tooltip here</h1>
 <script src="dist/Tooltip.js"></script>
 <script>
     new Tooltip(".t", "salut")
