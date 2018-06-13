@@ -48,9 +48,8 @@ class Tooltip {
      */
     private bind(): void {
         [].forEach.call(this.elms, (el: HTMLElement) => {
-            el.addEventListener("mouseenter", (e) => {
-                this.handleEnter(el, e)
-            })
+            el.addEventListener("mouseenter", (e) => this.handleEnter(el, e))
+            el.addEventListener("mouseleave", (e) => this.handleLeave(el, e))
         })
     }
 
@@ -58,15 +57,25 @@ class Tooltip {
      * Handle the enter of the mouse on the element
      */
     private handleEnter(el: HTMLElement, e: Event) {
+        // Tooltip top position
         let top = el.getBoundingClientRect().top
+        // tooltip left position
         let left = el.getBoundingClientRect().left
+        // tooltip element
         let tooltip = this.createTooltip()
+        // building the element
         tooltip.innerHTML = this.title
         tooltip.style.background = this.options.bgcolor
         tooltip.style.color = this.options.color
         tooltip.style.top = top - el.getBoundingClientRect().height - 20 + "px"
         tooltip.style.left = el.getBoundingClientRect().width / 2 - tooltip.offsetWidth / 2 + "px"
+        // append to the body
         document.body.appendChild(tooltip)
+    }
+
+    private handleLeave(el: HTMLElement, e: Event): void {
+        let tooltips: NodeListOf<HTMLElement> = document.querySelectorAll(".tooltip")
+        Array.prototype.forEach.call(tooltips, (el: HTMLElement) => document.body.removeChild(el))
     }
 
     /**
